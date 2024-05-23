@@ -17,44 +17,72 @@ def on_press(key):
         #print('alphanumeric key {0} pressed'.format(key.char))
         
         keyP = "#"
+        fun = "000"
         
         if key.char == 'w':
             keyP = "1"
-            #print('in' + keyPressed)
+            fun = "000"
         
         if key.char == 'e':
             keyP = "2"
-            #print('in' + keyPressed)
+            fun = "000"
         
         if key.char == 'r':
             keyP = "3"
-            #print('in' + keyPressed)
+            fun = "000"
         
         if key.char == 's':
             keyP = "4"
-            #print('in' + keyPressed)
+            fun = "000"
         
         if key.char == 'd':
             keyP = "_"
-            #print('in' + keyPressed)
+            fun = "000"
         
         if key.char == 'f':
             keyP = "6"
-            #print('in' + keyPressed)
+            fun = "000"
         
         if key.char == 'x':
             keyP = "7"
-            #print('in' + keyPressed)
+            fun = "000"
         
         if key.char == 'c':
             keyP = "8"
-            #print('in' + keyPressed)
+            fun = "000"
         
         if key.char == 'v':
             keyP = "9"
-            #print('in' + keyPressed)
+            fun = "000"
+
+        if key.char == '1':
+            fun = "001"
         
-        sendUDP(keyP)
+        if key.char == '2':
+            fun = "002"
+        
+        if key.char == '3':
+            fun = "003"
+        
+        if key.char == '4':
+            fun = "004"
+        
+        if key.char == '5':
+            fun = "005"
+        
+        if key.char == '6':
+            fun = "006"
+        
+        if key.char == '7':
+            fun = "007"
+        
+        if key.char == '8':
+            fun = "008"
+        
+        if key.char == '9':
+            fun = "009"
+        
+        sendUDP(keyP, fun)
         
     except AttributeError:
         print('special key {0} pressed'.format(key))
@@ -67,11 +95,11 @@ def on_release(key):
     #print('{0} released'.format(key))
     #sendUDP()
 
-def sendUDP(_keyP):
+def sendUDP(_keyP, _fun):
     if enableUDP == True:
         client_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         client_socket.settimeout(1.0)
-        message = str.encode(mode + height + _keyP)
+        message = str.encode(mode + height + _keyP + _fun)
         addr = (ipAddr, ipPort)
         start = time.time()
         client_socket.sendto(message, addr)
@@ -94,9 +122,9 @@ layout = [  [sg.Text("IP:")],[sg.InputText(key='IPit', default_text=ipAddr)], [s
             [sg.Text("Mode:  "), sg.Button('Walk'), sg.Button('Ride')],
             [sg.Text("Height:"), sg.Button('Low'), sg.Button('Middle'), sg.Button('High')],
             [sg.Text("   ")],
-            [sg.Button("   \\   ", key='1'),sg.Button("   /\   ", key='2'),sg.Button("   /   ", key='3')],
-            [sg.Button("  <   ", key='4'),sg.Button("   X   ", key='5'),sg.Button("  >   ", key='6')],
-            [sg.Button("   /   ", key='7'),sg.Button("   \/   ", key='8'),sg.Button("   \   ", key='9')]
+            [sg.Button("   \\   ", key='1'),sg.Button("   /\   ", key='2'),sg.Button("   /   ", key='3'), sg.Text("   "), sg.Button("001"), sg.Button("002"), sg.Button("003")],
+            [sg.Button("  <   ", key='4'),sg.Button("   X   ", key='5'),sg.Button("  >   ", key='6'), sg.Text("  "), sg.Button("004"), sg.Button("005"), sg.Button("006")],
+            [sg.Button("   /   ", key='7'),sg.Button("   \/   ", key='8'),sg.Button("   \   ", key='9'), sg.Text("   "), sg.Button("007"), sg.Button("008"), sg.Button("009")]
          ]
 
 sg.set_options(scaling=3)
@@ -109,6 +137,7 @@ while True:
     event, values = window.read()
     
     keyPr = "#"
+    fun="000"
     
     if event == 'Connect':
         enableUDP = True
@@ -147,12 +176,29 @@ while True:
         keyPr = '8'
     if event == '9':
         keyPr = '9'
-        
+    if event == '001':
+        fun = '001'
+    if event == '002':
+        fun = '002'
+    if event == '003':
+        fun = '003'
+    if event == '004':
+        fun = '004'
+    if event == '005':
+        fun = '005'
+    if event == '006':
+        fun = '006'
+    if event == '007':
+        fun = '007'
+    if event == '008':
+        fun = '008'
+    if event == '009':
+        fun = '009'
+
+    #print(event)
+    #print(values)
     
-    print(event)
-    print(values)
-    
-    sendUDP(keyPr)
+    sendUDP(keyPr, fun)
     
     # if user closes window or clicks cancel
     if event == sg.WIN_CLOSED:
