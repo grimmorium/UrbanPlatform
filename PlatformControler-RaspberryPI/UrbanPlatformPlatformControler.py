@@ -4,6 +4,14 @@ import smbus
 import time
 import sys
 
+def SendToArd(message, arduAddress):
+    for c in list(message):
+        # send data
+        bus.write_byte(arduAddress,c)
+        print(bus.read_byte(arduAddress))
+
+    
+
 bus = smbus.SMBus(1)
 arduAddress1 = 0x04              # Arduino I2C Addresses
 arduAddress2 = 0x05
@@ -21,14 +29,10 @@ while True:
     
     print("from GUI:" + str(message))
     
-    for c in list(message):
-        # send data
-        #i2cData = not i2cData
-        bus.write_byte(arduAddress1,c)
-        print ("Arduino answer to RPi:", bus.read_byte(arduAddress1))
-        # request data
-    #print ("Arduino answer to RPi:", bus.read_byte(arduAddress1))
-    #time.sleep(1)
-    print(message)
+    SendToArd(message, arduAddress1)
+    
+    #print ("Arduino 1 answer to RPi:", bus.read_byte(arduAddress1))
+    #print ("Arduino 2 answer to RPi:", bus.read_byte(arduAddress2))
+    #print ("Arduino 3 answer to RPi:", bus.read_byte(arduAddress3))
 
     server_socket.sendto(message, address)
