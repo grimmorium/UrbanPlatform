@@ -1,4 +1,4 @@
- git config --global credential.helper store
+git config --global credential.helper store
 
 --get pip for python
 sudo apt update
@@ -18,6 +18,11 @@ run sudo raspi-config
 and ativate i2c under "Interfacing Options"
 
 --install i2ctools
+1.  sudo apt-get install i2c-tools
+
+OR
+
+2.
 sudo apt update
 sudo apt install snapd
 sudo snap install snapd
