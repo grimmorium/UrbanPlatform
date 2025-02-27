@@ -27,7 +27,7 @@ void loop() {
 void receiveData(int byteCount) {
   while (Wire.available()) {
     i2cData = Wire.read();
-    if (i2cData == 1) {
+    if (i2cData == 48) {
       digitalWrite(LED, 1);
     }
     else {

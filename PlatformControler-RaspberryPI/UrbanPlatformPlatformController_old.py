@@ -28,6 +28,11 @@ while True:
     message = message.upper()
     
     print("from GUI:" + str(message))
+    
     SendToArd(message, arduAddress1)
+    
+    #print ("Arduino 1 answer to RPi:", bus.read_byte(arduAddress1))
+    #print ("Arduino 2 answer to RPi:", bus.read_byte(arduAddress2))
+    #print ("Arduino 3 answer to RPi:", bus.read_byte(arduAddress3))
 
     server_socket.sendto(message, address)
