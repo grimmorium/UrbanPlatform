@@ -8,7 +8,7 @@ def SendToArd(message, arduAddress):
         # send data
         bus.write_byte(arduAddress,c)
         cr = bus.read_byte(arduAddress)
-        print(cr + " - " + str(cr))
+        print(str(cr) + " - " + str(cr))
 i=0
 while True:
     i=i+1
