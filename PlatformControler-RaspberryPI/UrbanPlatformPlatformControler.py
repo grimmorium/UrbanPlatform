@@ -10,6 +10,8 @@ def SendToArd(message, arduAddress):
         print(bus.read_byte(arduAddress))
 
 while True:
-    SendToArd(999, 4);
+    
+    
+    SendToArd([999], 4);
     print("sent");
     time.sleep(3);
