@@ -14,4 +14,4 @@ while True:
     
     SendToArd([i], 4);
     print("sent");
-    time.sleep(2);
+    time.sleep(0.1);
