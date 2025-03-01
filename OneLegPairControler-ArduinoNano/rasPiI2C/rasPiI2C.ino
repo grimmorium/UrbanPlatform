@@ -37,5 +37,11 @@ void receiveData(int byteCount) {
 }
 // Handle request to send I2C data
 void sendData() { 
+  Wire.write(1);
+  Wire.write(2);
+  Wire.write(3);
   Wire.write(i2cData);
+  Wire.write(3);
+  Wire.write(2);
+  Wire.write(1);
 }
