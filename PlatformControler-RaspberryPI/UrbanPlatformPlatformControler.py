@@ -9,10 +9,18 @@ def SendToArd(message, arduAddress):
         bus.write_byte(arduAddress,c)
         cr = bus.read_byte(arduAddress)
         print(str(cr) + " - " + chr(cr))
+
+def SendToArd_block(message, arduAddress):
+    # send data
+    bus.write_i2c_block_data(arduAddress,0,list(message))
+    cr = bus.read_byte(arduAddress)
+    print(str(cr) + " - " + chr(cr))
+        
 i=0
+msg="just a test"
 while True:
     i=i+1
     
-    SendToArd([i], 4);
+    SendToArd_block(msg, 4);
     print("sent");
     time.sleep(0.1);
