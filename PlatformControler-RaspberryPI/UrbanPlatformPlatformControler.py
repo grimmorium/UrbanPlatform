@@ -14,7 +14,7 @@ def SendToArd_block(message, arduAddress):
     # send data
     bus.write_i2c_block_data(arduAddress,0,list(message))
     cr = bus.read_i2c_block_data(arduAddress,0,11)
-    print(str(cr) + " - " + chr(cr))
+    print(cr)
         
 i=0
 #msg="just a test"
