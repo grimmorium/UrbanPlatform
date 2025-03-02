@@ -18,7 +18,7 @@ def SendToArd_block(message, arduAddress):
         
 i=0
 #msg="just a test"
-msg = [ord('j'),ord('u'),ord('s'),ord('t'),ord(' '),ord('a'),ord(' '),ord('t'),ord('e'),ord('s'),ord('t')]
+msg = [ord('<'),ord('S'),1,2,3,4,5,6,7,ord('>')]
 
 while True:
     i=i+1
