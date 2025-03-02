@@ -14,6 +14,8 @@
 #define LED 13                   // Built-in LED
 int i2cData = 0;                 // the I2C data received
 void setup(){
+  Serial.begin(115200);
+
   Wire.begin(SLAVE_ADDRESS);
   Wire.onReceive(receiveData);
   Wire.onRequest(sendData);
@@ -27,21 +29,25 @@ void loop() {
 void receiveData(int byteCount) {
   while (Wire.available()) {
     i2cData = Wire.read();
-    if (i2cData == 48) {
-      digitalWrite(LED, 1);
-    }
-    else {
-      digitalWrite(LED, 0);
-    }
+
   }
 }
 // Handle request to send I2C data
 void sendData() { 
   Wire.write(1);
+  Serial.write('1');
   Wire.write(2);
+  Serial.write('2');
   Wire.write(3);
+  Serial.write('3');
   Wire.write(i2cData);
+  Serial.write(int(i2cData));
   Wire.write(3);
+  Serial.write('3');
   Wire.write(2);
+  Serial.write('2');
   Wire.write(1);
+  Serial.write('1');
+  Serial.write(char(10));
+  Serial.write(char(13));
 }
