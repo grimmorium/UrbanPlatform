@@ -1,31 +1,35 @@
 #include <Wire.h>
+#include <Servo.h>
+
+//Servos
+volatile Servo s1 ,s2, s3, s4, s5, s6;
+
 #define SLAVE_ADDRESS 0x04       // I2C address for Arduino
 int i2cData = 0;                 // the I2C data received
 
 char charAr[11];
 
-byte charCnt = -1;
+short charCnt = 0;
 
-char msgType = ' ';
+short msgType = -1;
 
-short AdjS1=0;
-short AdjS2=0;
-short AdjS3=0;
-short AdjS4=0;
-short AdjS5=0;
-short AdjS6=0;
-short AdjDC=0;
-
-byte S1=180;
-byte S2=180;
-byte S3=180;
-byte S4=180;
-byte S5=180;
-byte S6=180;
-byte DC=180;
+short S1=-1;
+short S2=-1;
+short S3=-1;
+short S4=-1;
+short S5=-1;
+short S6=-1;
+short DC=-1;
 
 void setup(){
   Serial.begin(115200);
+
+  s1.attach(14);
+  s2.attach(15);
+  s3.attach(16);
+  s4.attach(17);
+  s5.attach(7);
+  s6.attach(8);
 
   Wire.begin(SLAVE_ADDRESS);
   Wire.setWireTimeout(200,false);
@@ -41,44 +45,57 @@ void receiveData(int byteCount) {
   
   while (Wire.available()) {
     i2cData = Wire.read();
-    if(i2cData == '<'){charCnt = 1;}
-    if(charCnt = 2){msgType = i2cData;}
 
-    if(charCnt = 3){S1 = i2cData;}
-    if(charCnt = 4){S2 = i2cData;}
-    if(charCnt = 5){S3 = i2cData;}
-    if(charCnt = 6){S4 = i2cData;}
-    if(charCnt = 7){S5 = i2cData;}
-    if(charCnt = 8){S6 = i2cData;}
-    if(charCnt = 9){DC = i2cData;}
+    if(char(i2cData) == '>'){charCnt = 0;}
+    if(charCnt == 1){
+      if(S6<0 && S5>0){S6 = i2cData;}
+      if(S5<0 && S4>0){S5 = i2cData;}
+      if(S4<0 && S3>0){S4 = i2cData;}
+      if(S3<0 && S2>0){S3 = i2cData;}
+      if(S2<0 && S1>0){S2 = i2cData;}
+      if(S1<0 && msgType>0){S1 = i2cData;}
+      if(msgType<0){msgType = i2cData;}
+    }
+    if(char(i2cData) == '<'){charCnt = 1;}
 
-    if(i2cData == '>'){charCnt = -1; setMotoServoStates();}
-    if(charCnt > 1){charCnt++;}
-    
+    if(charCnt == 0){
+      msgType = -1;
+      S1 = -1;
+      S2 = -1;
+      S3 = -1;
+      S4 = -1;
+      S5 = -1;
+      S6 = -1;
+    }
+
+    if(S1>0 && S2>0 && S3>0 && S4>0 && S5>0 && S6>0){
+      s1.write(S1);
+      s2.write(S2);
+      s3.write(S3);
+      s4.write(S4);
+      s5.write(S5);
+      s6.write(S6);
+    }
+
+    Serial.print(i2cData);
+    Serial.print('/');
+    Serial.print(charCnt);
+    Serial.print('/');
+    Serial.print(msgType);
+    Serial.print('/');
+    Serial.print(S1);
+    Serial.print('/');
+    Serial.print(S2);
+    Serial.print('/');
+    Serial.print(S3);
+    Serial.print('/');
+    Serial.print(S4);
+    Serial.print('/');
+    Serial.print(S5);
+    Serial.print('/');
+    Serial.print(S6);
+    Serial.println('/');
   }
-  
-}
-
-void setMotoServoStates(){
-  Serial.print(msgType);
-  Serial.print(" - ");
-  Serial.println("setMotoServoStates IN");
-
-  msgType = ' ';
-  AdjS1=0;
-  AdjS2=0;
-  AdjS3=0;
-  AdjS4=0;
-  AdjS5=0;
-  AdjS6=0;
-  AdjDC=0;
-  S1=180;
-  S2=180;
-  S3=180;
-  S4=180;
-  S5=180;
-  S6=180;
-  DC=0;
 }
 
 // Handle request to send I2C data
