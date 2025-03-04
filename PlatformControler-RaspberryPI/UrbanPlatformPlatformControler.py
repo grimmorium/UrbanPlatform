@@ -18,11 +18,15 @@ def SendToArd_block(message, arduAddress):
         
 i=0
 #msg="just a test"
-msg = [ord('<'),ord('S'),1,2,3,4,5,6,7,ord('>')]
+msg = [ord('<'),ord('S'),1,2,3,4,5,6,7,ord('>')];
 
 while True:
     i=i+1
+    if i==256:
+        i=0
+        
+    msg = [ord('<'),ord('S'),i,i,i,i,i,i,i,ord('>')]
     
-    SendToArd_block(msg, 4);
-    print("sent");
-    time.sleep(0.1);
+    SendToArd_block(msg, 4)
+    print("sent")
+    time.sleep(0.1)
