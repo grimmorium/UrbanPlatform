@@ -29,4 +29,4 @@ while True:
     
     SendToArd_block(msg, 4)
     print("sent")
-    #time.sleep(0.1)
+    time.sleep(0.05)
