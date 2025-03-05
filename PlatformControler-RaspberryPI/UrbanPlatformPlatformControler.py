@@ -13,19 +13,17 @@ def SendToArd(message, arduAddress):
 def SendToArd_block(message, arduAddress):
     # send data
     bus.write_i2c_block_data(arduAddress,0,list(message))
-    cr = bus.read_i2c_block_data(arduAddress,0,11)
+    #cr = bus.read_i2c_block_data(arduAddress,0,11)
     #print(cr)
         
 i=0
-#msg="just a test"
-msg = [ord('<'),ord('S'),1,2,3,4,5,6,7,ord('>')];
 
 while True:
     i=i+5
     if i>255:
         i=0
         
-    msg = [ord('<'),ord('S'),i,i,i,i,i,i,i,ord('>')]
+    msg = [ord('<'),ord('S'),i,i+1,i+2,i+3,i+4,i+5,i+6,i+7,ord('>')]
     
     SendToArd_block(msg, 4)
     print("sent")
