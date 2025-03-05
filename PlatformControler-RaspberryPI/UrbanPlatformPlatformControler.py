@@ -2,6 +2,7 @@ import smbus2
 import time
 
 bus = smbus2.SMBus(1)
+time.sleep(1)
 
 def SendToArd(message, arduAddress):
     for c in list(message):
@@ -27,4 +28,4 @@ while True:
     
     SendToArd_block(msg, 4)
     print("sent")
-    time.sleep(0.05)
+    time.sleep(0.08)
