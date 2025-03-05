@@ -19,7 +19,8 @@ short S3=-1;
 short S4=-1;
 short S5=-1;
 short S6=-1;
-short DC=-1;
+short DC1=-1;
+short DC2=-1;
 
 void setup(){
   Serial.begin(115200);
@@ -48,13 +49,15 @@ void receiveData(int byteCount) {
 
     if(char(i2cData) == '>'){charCnt = 0;}
     if(charCnt == 1){
-      if(S6<0 && S5>0){S6 = i2cData;}
-      if(S5<0 && S4>0){S5 = i2cData;}
-      if(S4<0 && S3>0){S4 = i2cData;}
-      if(S3<0 && S2>0){S3 = i2cData;}
-      if(S2<0 && S1>0){S2 = i2cData;}
-      if(S1<0 && msgType>0){S1 = i2cData;}
-      if(msgType<0){msgType = i2cData;}
+      if(DC2<0 && DC1>0)    {DC2 = i2cData;}
+      if(DC1<0 && S6>0)     {DC1 = i2cData;}
+      if(S6<0  && S5>0)     {S6 = i2cData;}
+      if(S5<0  && S4>0)     {S5 = i2cData;}
+      if(S4<0  && S3>0)     {S4 = i2cData;}
+      if(S3<0  && S2>0)     {S3 = i2cData;}
+      if(S2<0  && S1>0)     {S2 = i2cData;}
+      if(S1<0  && msgType>0){S1 = i2cData;}
+      if(msgType<0)         {msgType = i2cData;}
     }
     if(char(i2cData) == '<'){charCnt = 1;}
 
@@ -66,6 +69,8 @@ void receiveData(int byteCount) {
       S4 = -1;
       S5 = -1;
       S6 = -1;
+      DC1= -1;
+      DC2= -1;
     }
 
     if(S1>0 && S2>0 && S3>0 && S4>0 && S5>0 && S6>0){
@@ -94,6 +99,10 @@ void receiveData(int byteCount) {
     Serial.print(S5);
     Serial.print('/');
     Serial.print(S6);
+    Serial.print('/');
+    Serial.print(DC1);
+    Serial.print('/');
+    Serial.print(DC2);
     Serial.println('/');
   }
 }
@@ -101,6 +110,4 @@ void receiveData(int byteCount) {
 // Handle request to send I2C data
 void sendData() { 
 
-  //Serial.write(char(10));
-  //Serial.write(char(13));
 }
