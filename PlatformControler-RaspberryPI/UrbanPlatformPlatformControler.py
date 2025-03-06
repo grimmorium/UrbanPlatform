@@ -66,8 +66,8 @@ while True:
     if lowMidleHigh=="H":
         lowMidleHighM = 5
     
-    print("rideWalkM:" + rideWalkM)
-    print("lowMidleHighM:" + lowMidleHighM)
+    print("rideWalkM:" + str(rideWalkM))
+    print("lowMidleHighM:" + str(lowMidleHighM))
     
     S1 = S1 * rideWalkM * lowMidleHighM
     S2 = S2 * rideWalkM * lowMidleHighM
