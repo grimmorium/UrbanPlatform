@@ -36,12 +36,12 @@ while True:
     F2 = message_str[6:7] #F2
     F3 = message_str[7:8] #F3
     
-    print(rideWalk) #ride / walk
-    print(lowMidleHigh) #low / midle / high
-    print(cross) #cross
-    print(F1) #F1
-    print(F2) #F2
-    print(F3) #F3
+    #print(rideWalk) #ride / walk
+    #print(lowMidleHigh) #low / midle / high
+    #print(cross) #cross
+    #print(F1) #F1
+    #print(F2) #F2
+    #print(F3) #F3
 
     rideWalkM=lowMidleHighM=1
     S1=S2=S3=S4=S5=S6=DC1=DC2=0
@@ -58,6 +58,13 @@ while True:
         S5=5
     if F3=="6":
         S6=5
+    
+    print("S1:" + str(S1))
+    print("S2:" + str(S2))
+    print("S3:" + str(S3))
+    print("S4:" + str(S4))
+    print("S5:" + str(S5))
+    print("S6:" + str(S6))
     
     if rideWalk=="W":
         rideWalkM = 2
