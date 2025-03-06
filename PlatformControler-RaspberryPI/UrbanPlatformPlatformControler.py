@@ -23,6 +23,6 @@ while True:
     msg = [ord('<'),ord('S'),i,i+1,i+2,i+3,i+4,i+5,i+6,i+7,ord('>')]
     
     SendToArd_block(msg, 4)
-    print("sent" +  msg)
+    print("sent")
     
     
