@@ -29,12 +29,12 @@ while True:
     print("from GUI:" + message_str)
     server_socket.sendto(message, address)
     
-    print(message_str[1,1])
-    print(message_str[2,1])
-    print(message_str[3,1])
-    print(message_str[4,1])
-    print(message_str[5,1])
-    print(message_str[6,1])
+    print(message_str[1:1])
+    print(message_str[2:1])
+    print(message_str[3:1])
+    print(message_str[4:1])
+    print(message_str[5:1])
+    print(message_str[6:1])
     
     
     i=5
