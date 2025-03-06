@@ -44,7 +44,7 @@ while True:
     print(F3) #F3
 
     rideWalkM=lowMidleHighM=1
-    S1=S2=S3=S4=S5=S6=DC1=DC2=0
+    S1=S2=S3=S4=S5=S6=DC1=DC2=5
     
     if F3=="1":
         S1=5
@@ -65,7 +65,10 @@ while True:
         lowMidleHighM = 2
     if lowMidleHigh=="H":
         lowMidleHighM = 5
-       
+    
+    print("rideWalkM:" + rideWalkM)
+    print("lowMidleHighM:" + lowMidleHighM)
+    
     S1 = S1 * rideWalkM * lowMidleHighM
     S2 = S2 * rideWalkM * lowMidleHighM
     S3 = S3 * rideWalkM * lowMidleHighM
