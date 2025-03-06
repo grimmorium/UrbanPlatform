@@ -2,6 +2,15 @@ import socket
 import smbus2
 import time
 
+S1 = -1
+S2 = -1
+S3 = -1
+S4 = -1
+S5 = -1
+S6 = -1
+DC1 = -1
+DC2 = -1
+
 bus = smbus2.SMBus(1)
 time.sleep(1)
 
@@ -13,11 +22,20 @@ def SendToArd_block(message, arduAddress):
     bus.write_i2c_block_data(arduAddress,0,list(message))
 
 while True:
+    
     message, address = server_socket.recvfrom(1024)
     message = message.upper()
-    
-    print("from GUI:" + str(message))
+    message_str = str(message)
+    print("from GUI:" + message_str)
     server_socket.sendto(message, address)
+    
+    print(message_str[1,1])
+    print(message_str[2,1])
+    print(message_str[3,1])
+    print(message_str[4,1])
+    print(message_str[5,1])
+    print(message_str[6,1])
+    
     
     i=5
     msg = [ord('<'),ord('S'),i,i+1,i+2,i+3,i+4,i+5,i+6,i+7,ord('>')]
