@@ -44,7 +44,7 @@ while True:
     print(F3) #F3
 
     rideWalkM=lowMidleHighM=1
-    S1=S2=S3=S4=S5=S6=DC1=DC2=5
+    S1=S2=S3=S4=S5=S6=DC1=DC2=0
     
     if F3=="1":
         S1=5
