@@ -59,13 +59,6 @@ while True:
     if F3=="6":
         S6=5
     
-    print("S1:" + str(S1))
-    print("S2:" + str(S2))
-    print("S3:" + str(S3))
-    print("S4:" + str(S4))
-    print("S5:" + str(S5))
-    print("S6:" + str(S6))
-    
     if rideWalk=="W":
         rideWalkM = 2
     if lowMidleHigh=="M":
@@ -83,7 +76,13 @@ while True:
     S5 = S5 * rideWalkM * lowMidleHighM
     S6 = S6 * rideWalkM * lowMidleHighM
     
-    i=5
+    print("S1:" + str(S1))
+    print("S2:" + str(S2))
+    print("S3:" + str(S3))
+    print("S4:" + str(S4))
+    print("S5:" + str(S5))
+    print("S6:" + str(S6))
+    
     msg = [ord('<'),ord('S'),S1,S2,S3,S4,S5,S6,DC1,DC2,ord('>')]
     
     SendToArd_block(msg, 4)
