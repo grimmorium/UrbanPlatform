@@ -49,13 +49,13 @@ void receiveData(int byteCount) {
 
     if(char(i2cData) == '>'){charCnt = 0;}
     if(charCnt == 1){
-      if(DC2<0 && DC1>0)    {DC2 = i2cData;}
-      if(DC1<0 && S6>0)     {DC1 = i2cData;}
-      if(S6<0  && S5>0)     {S6 = i2cData;}
-      if(S5<0  && S4>0)     {S5 = i2cData;}
-      if(S4<0  && S3>0)     {S4 = i2cData;}
-      if(S3<0  && S2>0)     {S3 = i2cData;}
-      if(S2<0  && S1>0)     {S2 = i2cData;}
+      if(DC2<0 && DC1>=0)    {DC2 = i2cData;}
+      if(DC1<0 && S6>=0)     {DC1 = i2cData;}
+      if(S6<0  && S5>=0)     {S6 = i2cData;}
+      if(S5<0  && S4>=0)     {S5 = i2cData;}
+      if(S4<0  && S3>=0)     {S4 = i2cData;}
+      if(S3<0  && S2>=0)     {S3 = i2cData;}
+      if(S2<0  && S1>=0)     {S2 = i2cData;}
       if(S1<0  && msgType>0){S1 = i2cData;}
       if(msgType<0)         {msgType = i2cData;}
     }
@@ -73,7 +73,7 @@ void receiveData(int byteCount) {
       DC2= -1;
     }
 
-    if(S1>0 && S2>0 && S3>0 && S4>0 && S5>0 && S6>0){
+    if(S1>=0 && S2>=0 && S3>=0 && S4>=0 && S5>=0 && S6>=0){
       s1.write(S1);
       s2.write(S2);
       s3.write(S3);
