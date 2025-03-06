@@ -35,7 +35,10 @@ while True:
     print(message_str[3:4])
     print(message_str[4:5])
     print(message_str[5:6])
-    print(message_str[6:])
+    print(message_str[6:7])
+    print(message_str[7:8])
+    print(message_str[8:9])
+    print(message_str[9:10])
     
     
     i=5
