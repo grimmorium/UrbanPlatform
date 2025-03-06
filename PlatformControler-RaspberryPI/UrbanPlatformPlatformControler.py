@@ -83,7 +83,7 @@ while True:
     print("S5:" + str(S5))
     print("S6:" + str(S6))
     
-    msg = [ord('<'),ord('S'),S1,S2,S3,S4,S5,S6,DC1,DC2,ord('>')]
+    msg = [ord('<'),ord('S'),int(S1),int(S2),int(S3),int(S4),int(S5),int(S6),int(DC1),int(DC2),ord('>')]
     
     SendToArd_block(msg, 4)
     print("sent")
