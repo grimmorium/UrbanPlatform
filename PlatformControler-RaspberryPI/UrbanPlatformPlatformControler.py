@@ -20,10 +20,10 @@ nextTm = time.time() + timeinterval
 
 def SendToArd_block(message, arduAddress):
     # send data
-    try:
-        bus.write_i2c_block_data(arduAddress,0,list(message))
-    except (ValueError, TypeError) as eB:
-        print(f"Error when sending msg to reciever[i2c addr {arduAddress}", eB)
+    #try:
+    bus.write_i2c_block_data(arduAddress,0,list(message))
+    #except (ValueError, TypeError) as eB:
+    #    print(f"Error when sending msg to reciever[i2c addr {arduAddress}", eB)
             
     
 
@@ -64,17 +64,17 @@ while True:
             
             try:
                 SendToArd_block(msgA, i2cAddrA)
-            except (ValueError, TypeError) as eA:
+            except Exception as eA:
                 print("Error when sending msg to reciever A[i2c addr " + str(i2cAddrA) + "]", eA)
             
             try:
                 SendToArd_block(msgB, i2cAddrB)
-            except (ValueError, TypeError) as eB:
+            except Exception as eB:
                 print("Error when sending msg to reciever B[i2c addr " + str(i2cAddrB) + "]", eB)
             
             try:
                 SendToArd_block(msgC, i2cAddrC)
-            except (ValueError, TypeError) as eC:
+            except Exception as eC:
                 print("Error when sending msg to reciever C[i2c addr " + str(i2cAddrC) + "]", eC)
             
             #time.sleep(cmd.GetTime()/1000)
