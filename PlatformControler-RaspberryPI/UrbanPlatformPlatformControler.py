@@ -55,7 +55,7 @@ def functionsStore(_rideWalk, _lowMidleHigh, _cross, _F1, _F2, _F3):
     pass
 
 def ReadFromSocket():
-    message = ""
+    message = "  RM%000"
     try:
         message, address = server_socket.recvfrom(1024)
     except BlockingIOError:
