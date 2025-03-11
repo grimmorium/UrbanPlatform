@@ -33,6 +33,16 @@ def functionsStore(_rideWalk, _lowMidleHigh, _cross, _F1, _F2, _F3):
     if int(_F1)==0 and int(_F2)==0 and int(_F3)==1:
         print("startup initialisation")
         commands.AddCommand(180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 1000)
+    
+    #set all to 0
+    if int(_F1)==0 and int(_F2)==0 and int(_F3)==9:
+        print("set all to 0")
+        commands.AddCommand(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1000)
+        
+    #set all to 250
+    if int(_F1)==0 and int(_F2)==0 and int(_F3)==8:
+        print("set all to 250")
+        commands.AddCommand(250, 250, 250, 250, 250, 250, 250, 250, 250, 250, 250, 250, 250, 250, 250, 250, 250, 250, 250, 250, 250, 250, 250, 250, 1000)
         
     print(f"functionsStore end: {commands}")
     pass
