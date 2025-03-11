@@ -58,11 +58,16 @@ while True:
         message, address = server_socket.recvfrom(1024)
     except BlockingIOError:
         print("no data")
+    finally:
+        message = ""
     
     message = message.upper()
     message_str = str(message)
     print("from GUI:" + message_str)
-    server_socket.sendto(message, address)
+    try:
+        server_socket.sendto(message, address)
+    except Exception as e:
+        print("nothing to resend")
     
     rideWalk = message_str[2:3] #ride / walk
     lowMidleHigh = message_str[3:4] #low / midle / high
