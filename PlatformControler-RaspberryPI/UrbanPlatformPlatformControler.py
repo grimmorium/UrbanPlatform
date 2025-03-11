@@ -57,7 +57,7 @@ while True:
         message = "  RMX000"       
     
     message = message.upper()
-    message_str = str(message)s
+    message_str = str(message)
     #print("from GUI:" + message_str)
     try:
         server_socket.sendto(message, address)
