@@ -38,7 +38,7 @@ def functionsStore(_rideWalk, _lowMidleHigh, _cross, _F1, _F2, _F3):
         
     #set a series of commands
     if int(_F1)==0 and int(_F2)==0 and int(_F3)==5:
-        print("set a series of commands")
+        print("set a series of commands" )
         commands.AddCommand(180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 1000)
         commands.AddCommand(90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 1000)
         commands.AddCommand(180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 1000)
