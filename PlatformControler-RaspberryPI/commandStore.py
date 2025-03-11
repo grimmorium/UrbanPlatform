@@ -175,6 +175,11 @@ class ComandStore:
         
         return result
     
+    def DelleteAllCommands(self):
+        while len(self.store)>1:
+            self.store.pop(1)
+            pass
+    
     def GetNextCommand(self):
         commandCopy = None
         for i in range(len(self.store)):

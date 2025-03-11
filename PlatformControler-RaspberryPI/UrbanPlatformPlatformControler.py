@@ -27,6 +27,9 @@ def SendToArd_block(message, arduAddress):
 def functionsStore(_rideWalk, _lowMidleHigh, _cross, _F1, _F2, _F3):
     #print(f"{_rideWalk} {_lowMidleHigh} {_cross} {_F1} {_F2} {_F3}")
     #startup initialisation
+    if str(_cross) == 'X':
+        commands.DelleteAllCommands()
+    
     if int(_F1)==0 and int(_F2)==0 and int(_F3)==1:
         print("startup initialisation")
         commands.AddCommand(180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 1000)
