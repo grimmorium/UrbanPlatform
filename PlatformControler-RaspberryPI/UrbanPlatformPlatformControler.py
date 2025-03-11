@@ -108,7 +108,7 @@ while True:
             print(f"{commands}")
         else:
             timeinterval = 0.1
-            print(f"on hold {commands}")
+            print(f"on hold {commands} ")
         nextTm = time.time() + timeinterval
     
     
