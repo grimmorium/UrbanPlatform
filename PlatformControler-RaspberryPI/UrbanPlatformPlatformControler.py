@@ -20,7 +20,12 @@ nextTm = time.time() + timeinterval
 
 def SendToArd_block(message, arduAddress):
     # send data
-    bus.write_i2c_block_data(arduAddress,0,list(message))
+    try:
+        bus.write_i2c_block_data(arduAddress,0,list(message))
+    except (ValueError, TypeError) as eB:
+        print(f"Error when sending msg to reciever[i2c addr {arduAddress}", eB)
+            
+    
 
 def functionsStore(_rideWalk, _lowMidleHigh, _cross, _F1, _F2, _F3):
     print(f"{_rideWalk} {_lowMidleHigh} {_cross} {_F1} {_F2} {_F3}")
