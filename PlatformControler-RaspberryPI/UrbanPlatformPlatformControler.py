@@ -49,11 +49,8 @@ def functionsStore(_rideWalk, _lowMidleHigh, _cross, _F1, _F2, _F3):
     print(f"functionsStore end: {commands}")
     pass
 
-c=0
 while True:
-    c=c+1
-    print(f"loop{c}")
-    
+    time.sleep(1000)
     try:
         message, address = server_socket.recvfrom(1024)
     except BlockingIOError:
