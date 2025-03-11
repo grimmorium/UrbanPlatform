@@ -25,7 +25,7 @@ def SendToArd_block(message, arduAddress):
     bus.write_i2c_block_data(arduAddress,0,list(message))
 
 def functionsStore(_rideWalk, _lowMidleHigh, _cross, _F1, _F2, _F3):
-    print(f"{_rideWalk} {_lowMidleHigh} {_cross} {_F1} {_F2} {_F3}")
+    #print(f"{_rideWalk} {_lowMidleHigh} {_cross} {_F1} {_F2} {_F3}")
     #startup initialisation
     if str(_cross) == 'X':
         commands.DelleteAllCommands()
