@@ -59,7 +59,7 @@ while True:
     except BlockingIOError:
         print("no data")
     finally:
-        message = "RMX000"
+        message = "  RMX000"
     
     message = message.upper()
     message_str = str(message)
