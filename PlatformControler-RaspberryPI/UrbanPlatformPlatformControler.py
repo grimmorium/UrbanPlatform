@@ -22,12 +22,7 @@ nextTm = time.time() + timeinterval
 
 def SendToArd_block(message, arduAddress):
     # send data
-    #try:
     bus.write_i2c_block_data(arduAddress,0,list(message))
-    #except (ValueError, TypeError) as eB:
-    #    print(f"Error when sending msg to reciever[i2c addr {arduAddress}", eB)
-            
-    
 
 def functionsStore(_rideWalk, _lowMidleHigh, _cross, _F1, _F2, _F3):
     print(f"{_rideWalk} {_lowMidleHigh} {_cross} {_F1} {_F2} {_F3}")
@@ -85,7 +80,7 @@ while True:
         
         if(commands.StoreLen() > 0):
             cmd = commands.GetNextCommand()
-            print(str(cmd))
+            #print(str(cmd))
             msgA = [ord('<'),ord('S'),cmd.GetAS1(),cmd.GetAS2(),cmd.GetAS3(),cmd.GetAS4(),cmd.GetAS5(),cmd.GetAS6(),cmd.GetADC1(),cmd.GetADC2(),ord('>')]
             msgB = [ord('<'),ord('S'),cmd.GetBS1(),cmd.GetBS2(),cmd.GetBS3(),cmd.GetBS4(),cmd.GetBS5(),cmd.GetBS6(),cmd.GetBDC1(),cmd.GetBDC2(),ord('>')]
             msgC = [ord('<'),ord('S'),cmd.GetCS1(),cmd.GetCS2(),cmd.GetCS3(),cmd.GetCS4(),cmd.GetCS5(),cmd.GetCS6(),cmd.GetCDC1(),cmd.GetCDC2(),ord('>')]
@@ -108,8 +103,9 @@ while True:
             
             #time.sleep(cmd.GetTime()/1000)
             
-            print("sent")
+            #print("sent")
             del cmd
+            print(f"{commands}")
         else:
             timeinterval = 0.1
             print(f"on hold {commands}")
