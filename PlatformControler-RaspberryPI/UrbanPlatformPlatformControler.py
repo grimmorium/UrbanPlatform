@@ -93,7 +93,7 @@ while True:
             del cmd
         else:
             timeinterval = 0.1
-            print("on hold")
+            print(f"on hold {commands}")
         nextTm = time.time() + timeinterval
     
     
