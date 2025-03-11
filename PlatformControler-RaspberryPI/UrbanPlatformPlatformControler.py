@@ -54,8 +54,28 @@ def functionsStore(_rideWalk, _lowMidleHigh, _cross, _F1, _F2, _F3):
     #print(f"functionsStore end: {commands}")
     pass
 
+def ReadFromSocket():
+    message = ""
+    try:
+        message, address = server_socket.recvfrom(1024)
+    except BlockingIOError:
+        message = "  RM%000"       
+    
+    message = message.upper()
+    
+    #print("from GUI:" + message_str)
+    try:
+        server_socket.sendto(message, address)
+    except Exception as e:
+        #print("nothing to resend")
+        pass
+        
+    return message
+
 while True:
     #time.sleep(1000)
+    message_str = ReadFromSocket()
+    '''
     try:
         message, address = server_socket.recvfrom(1024)
     except BlockingIOError:
@@ -69,6 +89,7 @@ while True:
     except Exception as e:
         #print("nothing to resend")
         pass
+    '''
     
     rideWalk = message_str[2:3] #ride / walk
     lowMidleHigh = message_str[3:4] #low / midle / high
