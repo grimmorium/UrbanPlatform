@@ -25,7 +25,7 @@ def SendToArd_block(message, arduAddress):
     bus.write_i2c_block_data(arduAddress,0,list(message))
 
 def functionsStore(_rideWalk, _lowMidleHigh, _cross, _F1, _F2, _F3):
-    print(f"{_rideWalk} {_lowMidleHigh} {_cross} {_F1} {_F2} {_F3}")
+    #print(f"{_rideWalk} {_lowMidleHigh} {_cross} {_F1} {_F2} {_F3}")
     #startup initialisation
     if int(_F1)==0 and int(_F2)==0 and int(_F3)==1:
         print("startup initialisation")
@@ -48,7 +48,7 @@ def functionsStore(_rideWalk, _lowMidleHigh, _cross, _F1, _F2, _F3):
         commands.AddCommand(180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 1000)
         commands.AddCommand(90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 1000)
         
-    print(f"functionsStore end: {commands}")
+    #print(f"functionsStore end: {commands}")
     pass
 
 while True:
