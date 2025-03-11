@@ -59,7 +59,7 @@ while True:
     try:
         message, address = server_socket.recvfrom(1024)
     except BlockingIOError:
-        message = "  RMX000"       
+        message = "  RM%000"       
     
     message = message.upper()
     message_str = str(message)
