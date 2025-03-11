@@ -12,8 +12,10 @@ commands = ComandStore()
 bus = smbus2.SMBus(1)
 time.sleep(1)
 
+
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 server_socket.bind(('', 12000))
+server_socket.setblocking(False)
 
 timeinterval = 1.0
 nextTm = time.time() + timeinterval
@@ -52,7 +54,11 @@ while True:
     c=c+1
     print(f"loop{c}")
     
-    message, address = server_socket.recvfrom(1024)
+    try:
+        message, address = server_socket.recvfrom(1024)
+    except BlockingIOError:
+        print("no data")
+    
     message = message.upper()
     message_str = str(message)
     print("from GUI:" + message_str)
