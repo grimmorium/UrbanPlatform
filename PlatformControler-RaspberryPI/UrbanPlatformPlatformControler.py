@@ -26,6 +26,7 @@ def functionsStore(_rideWalk, _lowMidleHigh, _cross, _F1, _F2, _F3):
     
     #startup initialisation
     if _F1==0 and _F2 ==0 and _F3==1:
+        print("startup initialisation")
         commands.AddCommand(180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 1000)
         
     
@@ -76,7 +77,7 @@ while True:
             print("sent")
             del cmd
         else:
-            timeinterval = 1.0
+            timeinterval = 0.2
             print("on hold")
         nextTm = time.time() + timeinterval
     
