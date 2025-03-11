@@ -1,15 +1,13 @@
 import socket
 import smbus2
 import time
+from commandStore import ComandStore
 
-S1 = -1
-S2 = -1
-S3 = -1
-S4 = -1
-S5 = -1
-S6 = -1
-DC1 = -1
-DC2 = -1
+i2cAddrA = 4
+i2cAddrB = 5
+i2cAddrC = 6
+
+commands = ComandStore()
 
 bus = smbus2.SMBus(1)
 time.sleep(1)
@@ -17,12 +15,23 @@ time.sleep(1)
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 server_socket.bind(('', 12000))
 
+timeinterval = 1.0
+nextTm = time.time() + timeinterval
+
 def SendToArd_block(message, arduAddress):
     # send data
     bus.write_i2c_block_data(arduAddress,0,list(message))
 
-while True:
+def functionsStore(_rideWalk, _lowMidleHigh, _cross, _F1, _F2, _F3):
     
+    #startup initialisation
+    if _F1==0 & _F2 ==0 & _F3==1:
+        commands.AddCommand(180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 1000)
+        
+    
+    pass
+
+while True:
     message, address = server_socket.recvfrom(1024)
     message = message.upper()
     message_str = str(message)
@@ -36,56 +45,39 @@ while True:
     F2 = message_str[6:7] #F2
     F3 = message_str[7:8] #F3
     
-    #print(rideWalk) #ride / walk
-    #print(lowMidleHigh) #low / midle / high
-    #print(cross) #cross
-    #print(F1) #F1
-    #print(F2) #F2
-    #print(F3) #F3
-
-    rideWalkM=lowMidleHighM=1
-    S1=S2=S3=S4=S5=S6=DC1=DC2=0
+    functionsStore(rideWalk, lowMidleHigh, cross, F1, F2, F3)
     
-    if F3=="1":
-        S1=5
-    if F3=="2":
-        S2=5
-    if F3=="3":
-        S3=5
-    if F3=="4":
-        S4=5
-    if F3=="5":
-        S5=5
-    if F3=="6":
-        S6=5
-    
-    if rideWalk=="W":
-        rideWalkM = 2
-    if lowMidleHigh=="M":
-        lowMidleHighM = 2
-    if lowMidleHigh=="H":
-        lowMidleHighM = 5
-    
-    print("rideWalkM:" + str(rideWalkM))
-    print("lowMidleHighM:" + str(lowMidleHighM))
-    
-    S1 = S1 * rideWalkM * lowMidleHighM
-    S2 = S2 * rideWalkM * lowMidleHighM
-    S3 = S3 * rideWalkM * lowMidleHighM
-    S4 = S4 * rideWalkM * lowMidleHighM
-    S5 = S5 * rideWalkM * lowMidleHighM
-    S6 = S6 * rideWalkM * lowMidleHighM
-    
-    print("S1:" + str(S1))
-    print("S2:" + str(S2))
-    print("S3:" + str(S3))
-    print("S4:" + str(S4))
-    print("S5:" + str(S5))
-    print("S6:" + str(S6))
-    
-    msg = [ord('<'),ord('S'),int(S1),int(S2),int(S3),int(S4),int(S5),int(S6),int(DC1),int(DC2),ord('>')]
-    
-    SendToArd_block(msg, 4)
-    print("sent")
+    if nextTm < time.time():
+        if(commands.StoreLen() > 0):
+            cmd = commands.GetNextCommand()
+            print(str(cmd))
+            msgA = [ord('<'),ord('S'),cmd.GetAS1(),cmd.GetAS2(),cmd.GetAS3(),cmd.GetAS4(),cmd.GetAS5(),cmd.GetAS6(),cmd.GetADC1(),cmd.GetADC2(),ord('>')]
+            msgB = [ord('<'),ord('S'),cmd.GetBS1(),cmd.GetBS2(),cmd.GetBS3(),cmd.GetBS4(),cmd.GetBS5(),cmd.GetBS6(),cmd.GetBDC1(),cmd.GetBDC2(),ord('>')]
+            msgC = [ord('<'),ord('S'),cmd.GetCS1(),cmd.GetCS2(),cmd.GetCS3(),cmd.GetCS4(),cmd.GetCS5(),cmd.GetCS6(),cmd.GetCDC1(),cmd.GetCDC2(),ord('>')]
+            timeinterval = cmd.GetTime()/1000
+            
+            try:
+                SendToArd_block(msgA, i2cAddrA)
+            except (ValueError, TypeError) as eA:
+                print("Error when sending msg to reciever A[i2c addr " + str(i2cAddrA) + "]", eA)
+            
+            try:
+                SendToArd_block(msgB, i2cAddrB)
+            except (ValueError, TypeError) as eB:
+                print("Error when sending msg to reciever B[i2c addr " + str(i2cAddrB) + "]", eB)
+            
+            try:
+                SendToArd_block(msgC, i2cAddrC)
+            except (ValueError, TypeError) as eC:
+                print("Error when sending msg to reciever C[i2c addr " + str(i2cAddrC) + "]", eC)
+            
+            #time.sleep(cmd.GetTime()/1000)
+            
+            print("sent")
+            del cmd
+        else:
+            timeinterval = 1.0
+            print("on hold")
+        nextTm = time.time() + timeinterval
     
     
