@@ -49,6 +49,9 @@ def functionsStore(_rideWalk, _lowMidleHigh, _cross, _F1, _F2, _F3):
 
 c=0
 while True:
+    c=c+1
+    print(f"loop{c}")
+    
     message, address = server_socket.recvfrom(1024)
     message = message.upper()
     message_str = str(message)
@@ -65,8 +68,7 @@ while True:
     functionsStore(rideWalk, lowMidleHigh, cross, F1, F2, F3)
     
     if nextTm < time.time():
-        c=c+1
-        print(f"loop{c}")
+        
         if(commands.StoreLen() > 0):
             cmd = commands.GetNextCommand()
             print(str(cmd))
