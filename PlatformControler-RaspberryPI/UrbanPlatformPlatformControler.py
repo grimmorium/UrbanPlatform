@@ -23,9 +23,9 @@ def SendToArd_block(message, arduAddress):
     bus.write_i2c_block_data(arduAddress,0,list(message))
 
 def functionsStore(_rideWalk, _lowMidleHigh, _cross, _F1, _F2, _F3):
-    
+    print(f"{_rideWalk} {_lowMidleHigh} {_cross} {_F1} {_F2} {_F3}")
     #startup initialisation
-    if _F1==0 and _F2 ==0 and _F3==1:
+    if int(_F1==0) and int(_F2 ==0) and int(_F3==1):
         print("startup initialisation")
         commands.AddCommand(180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 1000)
         
@@ -77,7 +77,7 @@ while True:
             print("sent")
             del cmd
         else:
-            timeinterval = 0.2
+            timeinterval = 0.1
             print("on hold")
         nextTm = time.time() + timeinterval
     
