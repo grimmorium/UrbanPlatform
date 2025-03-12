@@ -56,7 +56,8 @@ def functionsStore(_rideWalk, _lowMidleHigh, _cross, _F1, _F2, _F3):
 
 while True:
     #time.sleep(1000)
-    
+
+    #to move start
     try:
         message, address = server_socket.recvfrom(1024)
     except BlockingIOError:
@@ -80,8 +81,10 @@ while True:
     F3 = message_str[7:8] #F3
     
     functionsStore(rideWalk, lowMidleHigh, cross, F1, F2, F3)
+    #to move end
     
     if nextTm < time.time():
+        #move here 
         
         if(commands.StoreLen() > 0):
             cmd = commands.GetNextCommand()
