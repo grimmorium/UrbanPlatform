@@ -21,12 +21,12 @@ timeinterval = 1.0
 nextTm = time.time() + timeinterval
 
 def SendToArd_block(message, arduAddress):
-    # send data
     bus.write_i2c_block_data(arduAddress,0,list(message))
 
 def functionsStore(_rideWalk, _lowMidleHigh, _cross, _F1, _F2, _F3):
     #print(f"{_rideWalk} {_lowMidleHigh} {_cross} {_F1} {_F2} {_F3}")
     
+    #delete all comands in the que
     if str(_cross) == '_':
         print(f"DelleteAllCommands {str(_cross)}")
         commands.DelleteAllCommands()
@@ -53,7 +53,6 @@ def functionsStore(_rideWalk, _lowMidleHigh, _cross, _F1, _F2, _F3):
         commands.AddCommand(180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 1000)
         commands.AddCommand(90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 1000)
         
-    #print(f"functionsStore end: {commands}")
     pass
 
 while True:
@@ -65,11 +64,9 @@ while True:
     
     message = message.upper()
     message_str = str(message)
-    #print("from GUI:" + message_str)
     try:
         server_socket.sendto(message, address)
     except Exception as e:
-        #print("nothing to resend")
         pass
     
     
@@ -86,7 +83,7 @@ while True:
     if nextTm < time.time():
         if(commands.StoreLen() > 0):
             cmd = commands.GetNextCommand()
-            #print(str(cmd))
+            
             msgA = [ord('<'),ord('S'),cmd.GetAS1(),cmd.GetAS2(),cmd.GetAS3(),cmd.GetAS4(),cmd.GetAS5(),cmd.GetAS6(),cmd.GetADC1(),cmd.GetADC2(),ord('>')]
             msgB = [ord('<'),ord('S'),cmd.GetBS1(),cmd.GetBS2(),cmd.GetBS3(),cmd.GetBS4(),cmd.GetBS5(),cmd.GetBS6(),cmd.GetBDC1(),cmd.GetBDC2(),ord('>')]
             msgC = [ord('<'),ord('S'),cmd.GetCS1(),cmd.GetCS2(),cmd.GetCS3(),cmd.GetCS4(),cmd.GetCS5(),cmd.GetCS6(),cmd.GetCDC1(),cmd.GetCDC2(),ord('>')]
@@ -107,9 +104,6 @@ while True:
             except Exception as eC:
                 print("Error when sending msg to reciever C[i2c addr " + str(i2cAddrC) + "]", eC)
             
-            #time.sleep(cmd.GetTime()/1000)
-            
-            #print("sent")
             del cmd
             print(f"{commands}")
         else:
