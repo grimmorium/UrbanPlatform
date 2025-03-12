@@ -28,6 +28,7 @@ def functionsStore(_rideWalk, _lowMidleHigh, _cross, _F1, _F2, _F3):
     #print(f"{_rideWalk} {_lowMidleHigh} {_cross} {_F1} {_F2} {_F3}")
     #startup initialisation
     if str(_cross) == 'X':
+        print(f"DelleteAllCommands {str(_cross)}")
         commands.DelleteAllCommands()
     
     if int(_F1)==0 and int(_F2)==0 and int(_F3)==1:
