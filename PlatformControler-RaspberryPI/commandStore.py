@@ -177,7 +177,8 @@ class ComandStore:
     
     def DelleteAllCommands(self):
         while len(self.store)>1:
-            self.store.pop(1)
+            #self.store.pop(1)
+            self.GetNextCommand()
             pass
     
     def GetNextCommand(self):
