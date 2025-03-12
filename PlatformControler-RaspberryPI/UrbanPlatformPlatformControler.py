@@ -58,6 +58,7 @@ while True:
     #time.sleep(1000)
 
     #to move start
+    '''
     try:
         message, address = server_socket.recvfrom(1024)
     except BlockingIOError:
@@ -81,10 +82,34 @@ while True:
     F3 = message_str[7:8] #F3
     
     functionsStore(rideWalk, lowMidleHigh, cross, F1, F2, F3)
+    '''
     #to move end
     
     if nextTm < time.time():
         #move here 
+        try:
+            message, address = server_socket.recvfrom(1024)
+        except BlockingIOError:
+            message = "  RM%000"       
+        
+        message = message.upper()
+        message_str = str(message)
+        #print("from GUI:" + message_str)
+        try:
+            server_socket.sendto(message, address)
+        except Exception as e:
+            #print("nothing to resend")
+            pass
+        
+        
+        rideWalk = message_str[2:3] #ride / walk
+        lowMidleHigh = message_str[3:4] #low / midle / high
+        cross = message_str[4:5] #cross
+        F1 = message_str[5:6] #F1
+        F2 = message_str[6:7] #F2
+        F3 = message_str[7:8] #F3
+        
+        functionsStore(rideWalk, lowMidleHigh, cross, F1, F2, F3)
         
         if(commands.StoreLen() > 0):
             cmd = commands.GetNextCommand()
