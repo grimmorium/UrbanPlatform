@@ -3,9 +3,9 @@ import smbus2
 import time
 from commandStore import ComandStore
 
-i2cAddrA = 4
-i2cAddrB = 5
-i2cAddrC = 6
+i2cAddrA = 10 #x0A
+i2cAddrB = 11 #x0B
+i2cAddrC = 12 #x0C
 
 commands = ComandStore()
 
