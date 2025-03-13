@@ -4,7 +4,7 @@
 //Servos
 volatile Servo s1 ,s2, s3, s4, s5, s6;
 
-#define SLAVE_ADDRESS 0x04       // I2C address for Arduino
+#define SLAVE_ADDRESS 0x0a       // I2C address for Arduino x0A-rear; x0B-middle; x0C-front
 int i2cData = 0;                 // the I2C data received
 
 char charAr[11];
